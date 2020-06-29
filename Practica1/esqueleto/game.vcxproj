@@ -127,8 +127,10 @@
     <ClCompile Include="AlignSteering.cpp" />
     <ClCompile Include="AlignToMovement.cpp" />
     <ClCompile Include="ArriveSteering.cpp" />
+    <ClCompile Include="Behavior.cpp" />
     <ClCompile Include="character.cpp" />
     <ClCompile Include="gameConfig.cpp" />
+    <ClCompile Include="Group.cpp" />
     <ClCompile Include="host\FolderWatcher-win.cpp" />
     <ClCompile Include="host\GlutHost.cpp" />
     <ClCompile Include="host\GlutHostMain.cpp" />
@@ -138,6 +140,8 @@
     <ClCompile Include="PathFollowingSteering.cpp" />
     <ClCompile Include="PursueSteering.cpp" />
     <ClCompile Include="SeekSteering.cpp" />
+    <ClCompile Include="Selector.cpp" />
+    <ClCompile Include="Sequence.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
@@ -146,8 +150,10 @@
     <ClInclude Include="AlignSteering.h" />
     <ClInclude Include="AlignToMovement.h" />
     <ClInclude Include="ArriveSteering.h" />
+    <ClInclude Include="Behavior.h" />
     <ClInclude Include="character.h" />
     <ClInclude Include="gameConfig.h" />
+    <ClInclude Include="Group.h" />
     <ClInclude Include="host\FolderWatcher-win.h" />
     <ClInclude Include="host\GlutHost.h" />
     <ClInclude Include="host\ParticlePresets.h" />
@@ -156,6 +162,8 @@
     <ClInclude Include="PathFollowingSteering.h" />
     <ClInclude Include="PursueSteering.h" />
     <ClInclude Include="SeekSteering.h" />
+    <ClInclude Include="Selector.h" />
+    <ClInclude Include="Sequence.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

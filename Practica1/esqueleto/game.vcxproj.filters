@@ -36,6 +36,10 @@
     <ClCompile Include="SeekSteering.cpp">
       <Filter>steerings</Filter>
     </ClCompile>
+    <ClCompile Include="Behavior.cpp" />
+    <ClCompile Include="Group.cpp" />
+    <ClCompile Include="Sequence.cpp" />
+    <ClCompile Include="Selector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character.h" />
@@ -70,6 +74,10 @@
     <ClInclude Include="SeekSteering.h">
       <Filter>steerings</Filter>
     </ClInclude>
+    <ClInclude Include="Behavior.h" />
+    <ClInclude Include="Group.h" />
+    <ClInclude Include="Sequence.h" />
+    <ClInclude Include="Selector.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="host">
