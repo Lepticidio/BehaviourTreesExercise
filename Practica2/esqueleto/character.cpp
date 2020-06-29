@@ -6,14 +6,20 @@
 #include "PathFollowingSteering.h"
 #include "PursueSteering.h"
 #include "AlignToMovement.h"
-#include "PathFollowingSteering.h"
+#include "ArriveSteering.h"
 
-
-USVec2D RotateVector(USVec2D _vInitialVector, float _fAngle)
+USVec2D Character::RotateVector(USVec2D _vInitialVector, float _fAngle)
 {
-	return USVec2D(cos(_fAngle) * _vInitialVector.mX - sin(_fAngle) * _vInitialVector.mY, sin(_fAngle) * _vInitialVector.mX + cos(_fAngle) * _vInitialVector.mY);
+	float fRadians = _fAngle / 57.2958f;
+	return USVec2D(cos(fRadians) * _vInitialVector.mX - sin(fRadians) * _vInitialVector.mY, sin(fRadians) * _vInitialVector.mX + cos(fRadians) * _vInitialVector.mY);
 }
-
+float Character::AngleBetweenVectors(USVec2D _v0, USVec2D _v1)
+{
+	float fDot = _v0.Dot(_v1);
+	float fAngle = acos(fDot);
+	float fDegrees = fAngle * 57.2958f;
+	return fDegrees;
+}
 
 Character::Character() : mLinearVelocity(00.0f, 0.0f), mAngularVelocity(0.0f)
 {
@@ -21,13 +27,12 @@ Character::Character() : mLinearVelocity(00.0f, 0.0f), mAngularVelocity(0.0f)
 		RTTI_EXTEND(MOAIEntity2D)
 		RTTI_END
 		m_pSeek = new SeekSteering(this);
-		m_pArrive = new ArriveSteering(this);
-		m_pAlign = new AlignSteering(this);
-		m_pAlignToMovement = new AlignToMovement(this, m_pAlign);
-		const char* sPathName = "path.xml";
-		m_pPath = new Path(sPathName);
-		m_pPathSteering = new PathFollowingSteering(m_pSeek, m_pPath, this);
-		m_pPursueSteering = new PursueSteering(m_pArrive, this);
+	m_pArrive = new ArriveSteering(this);
+	m_pAlign = new AlignSteering(this);
+	m_pAlignToMovement = new AlignToMovement(this, m_pAlign);
+	const char* sPathName = "path.xml";
+	m_pPath = new Path(sPathName);
+	m_pPathSteering = new PathFollowingSteering(m_pSeek, m_pPath, this);
 }
 
 Character::~Character()
@@ -37,7 +42,7 @@ Character::~Character()
 
 void Character::OnStart()
 {
-    ReadParams(m_sParamsName.c_str(), mParams);
+	ReadParams(m_sParamsName.c_str(), mParams);
 	m_pSeek->Initialize();
 	m_pArrive->Initialize();
 	m_pAlign->Initialize();
@@ -55,7 +60,8 @@ void Character::OnUpdate(float step)
 {
 	//USVec2D vAcceleration = m_pSeek->GetSteering(mParams.targetPosition); 
 	//USVec2D vAcceleration = m_pArrive->GetSteering(mParams.targetPosition);
-	
+
+	m_fLastStep = step;
 	USVec2D vAcceleration(0, 0);
 	if (m_bIsEnemy)
 	{
@@ -70,13 +76,13 @@ void Character::OnUpdate(float step)
 	}
 	else
 	{
-		vAcceleration = m_pPursueSteering->GetSteering();
+		//vAcceleration = m_pPursueSteering->GetSteering();
 	}
 	//USVec2D vAcceleration = m_pPathSteering->GetSteering();
 	//USVec2D vAcceleration (0,0);
 	USVec2D vCurrentVelocity = GetLinearVelocity() + vAcceleration * step;
 	SetLinearVelocity(vCurrentVelocity.mX, vCurrentVelocity.mY);
-	SetLoc(GetLoc() + GetLinearVelocity()*step);
+	SetLoc(GetLoc() + GetLinearVelocity() * step);
 
 	//float fAngularAcceleration = m_pAlign->GetSteering(mParams.targetRotation);
 	float fAngularAcceleration = m_pAlignToMovement->GetSteering();
@@ -110,19 +116,14 @@ void Character::DrawDebug()
 	MOAIDraw::DrawLine(GetLoc(), GetLoc() + GetLinearVelocity());
 }
 
-void Character::SetPursuedCharacter(Character* _pPursued)
-{ 
-	m_pPursueSteering->SetTarget(_pPursued);
-}
-
 
 // Lua configuration
 
 void Character::RegisterLuaFuncs(MOAILuaState& state)
 {
 	MOAIEntity2D::RegisterLuaFuncs(state);
-	
-	luaL_Reg regTable [] = {
+
+	luaL_Reg regTable[] = {
 		{ "setLinearVel",			_setLinearVel},
 		{ "setAngularVel",			_setAngularVel},
 		{ "checkIsEnemy",			_checkIsEnemy},
@@ -135,18 +136,18 @@ void Character::RegisterLuaFuncs(MOAILuaState& state)
 int Character::_setLinearVel(lua_State* L)
 {
 	MOAI_LUA_SETUP(Character, "U")
-	
-	float pX = state.GetValue<float>(2, 0.0f);
+
+		float pX = state.GetValue<float>(2, 0.0f);
 	float pY = state.GetValue<float>(3, 0.0f);
 	self->SetLinearVelocity(pX, pY);
-	return 0;	
+	return 0;
 }
 
 int Character::_setAngularVel(lua_State* L)
 {
 	MOAI_LUA_SETUP(Character, "U")
-	
-	float angle = state.GetValue<float>(2, 0.0f);
+
+		float angle = state.GetValue<float>(2, 0.0f);
 	self->SetAngularVelocity(angle);
 
 	return 0;
@@ -155,19 +156,18 @@ int Character::_setAngularVel(lua_State* L)
 int Character::_checkIsEnemy(lua_State* L)
 {
 	MOAI_LUA_SETUP(Character, "U")
-	bool bIsEnemy = state.GetValue<bool>(2, 0.0f);
+		bool bIsEnemy = state.GetValue<bool>(2, 0.0f);
 	self->SetIsEnemy(bIsEnemy);
 	if (bIsEnemy)
 	{
 		self->SetParamsName("params_enemy.xml");
 	}
 	else
-	{	
+	{
 		Character* pToBePursued = state.GetLuaObject<Character>(3, 0.0f);
 		self->SetParamsName("params_enemy.xml");
-		self->SetPursuedCharacter(pToBePursued);
+		//self->SetPursuedCharacter(pToBePursued);
 	}
 
 	return 0;
 }
-	

@@ -40,6 +40,7 @@
     <ClCompile Include="Group.cpp" />
     <ClCompile Include="Sequence.cpp" />
     <ClCompile Include="Selector.cpp" />
+    <ClCompile Include="BehaviorPursue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character.h" />
@@ -78,6 +79,7 @@
     <ClInclude Include="Group.h" />
     <ClInclude Include="Sequence.h" />
     <ClInclude Include="Selector.h" />
+    <ClInclude Include="BehaviorPursue.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="host">
