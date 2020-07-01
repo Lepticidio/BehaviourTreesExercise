@@ -130,6 +130,7 @@
     <ClCompile Include="Behavior.cpp" />
     <ClCompile Include="BehaviorIdle.cpp" />
     <ClCompile Include="BehaviorPursue.cpp" />
+    <ClCompile Include="BehaviorWindup.cpp" />
     <ClCompile Include="character.cpp" />
     <ClCompile Include="ConditionCanSee.cpp" />
     <ClCompile Include="gameConfig.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Behavior.h" />
     <ClInclude Include="BehaviorIdle.h" />
     <ClInclude Include="BehaviorPursue.h" />
+    <ClInclude Include="BehaviorWindup.h" />
     <ClInclude Include="character.h" />
     <ClInclude Include="ConditionCanSee.h" />
     <ClInclude Include="gameConfig.h" />
