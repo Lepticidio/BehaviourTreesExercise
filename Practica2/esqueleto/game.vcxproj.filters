@@ -44,6 +44,7 @@
     <ClCompile Include="BehaviorIdle.cpp" />
     <ClCompile Include="ConditionCanSee.cpp" />
     <ClCompile Include="BehaviorWindup.cpp" />
+    <ClCompile Include="BehaviorAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character.h" />
@@ -86,6 +87,7 @@
     <ClInclude Include="BehaviorIdle.h" />
     <ClInclude Include="ConditionCanSee.h" />
     <ClInclude Include="BehaviorWindup.h" />
+    <ClInclude Include="BehaviorAttack.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="host">

@@ -128,6 +128,7 @@
     <ClCompile Include="AlignToMovement.cpp" />
     <ClCompile Include="ArriveSteering.cpp" />
     <ClCompile Include="Behavior.cpp" />
+    <ClCompile Include="BehaviorAttack.cpp" />
     <ClCompile Include="BehaviorIdle.cpp" />
     <ClCompile Include="BehaviorPursue.cpp" />
     <ClCompile Include="BehaviorWindup.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="AlignToMovement.h" />
     <ClInclude Include="ArriveSteering.h" />
     <ClInclude Include="Behavior.h" />
+    <ClInclude Include="BehaviorAttack.h" />
     <ClInclude Include="BehaviorIdle.h" />
     <ClInclude Include="BehaviorPursue.h" />
     <ClInclude Include="BehaviorWindup.h" />

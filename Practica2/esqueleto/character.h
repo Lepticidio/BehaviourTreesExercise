@@ -29,6 +29,7 @@ public:
 	void SetAngularVelocity(float angle) { mAngularVelocity = angle; }
 	void SetParamsName(std::string _sName) { m_sParamsName = _sName; }
 	void SetIsEnemy(bool _bIsEnemy) { m_bIsEnemy = _bIsEnemy; }
+	void TakeDamage(float _fAmount) { m_fHealth -= _fAmount; }
 
 	static USVec2D RotateVector(USVec2D _vInitialVector, float _fAngle);
 	static float AngleBetweenVectors(USVec2D _v0, USVec2D _v1);
@@ -43,6 +44,7 @@ private:
 	float m_fTimeCounter;
 	float m_fSecondsToChangeTarget = 5;
 	float m_fLastStep;
+	float m_fHealth = 100;
 
 	Params mParams;
 

@@ -85,6 +85,13 @@ void Character::OnUpdate(float step)
 	{
 		m_pRoot->tick();
 	}
+	if (m_fHealth <= 0)
+	{
+		m_fHealth = 0;
+		SetImage(1);
+		vAcceleration = USVec2D(0, 0);
+		SetLinearVelocity(0, 0);
+	}
 	//USVec2D vAcceleration = m_pPathSteering->GetSteering();
 	//USVec2D vAcceleration (0,0);
 	USVec2D vCurrentVelocity = GetLinearVelocity() + vAcceleration * step;

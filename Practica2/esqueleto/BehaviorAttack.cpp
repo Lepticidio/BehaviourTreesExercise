@@ -1,19 +1,19 @@
 #include "stdafx.h"
-#include "BehaviorWindup.h"
+#include "BehaviorAttack.h"
 #include "PursueSteering.h"
 #include "character.h"
 
-Status BehaviorWindup::update()
+Status BehaviorAttack::update()
 {
-
 	m_fTimePassed += m_pCharacter->GetLastStep();
-
 	USVec2D vAcceleration = m_pPursueSteering->GetSteering();
 	USVec2D vCurrentVelocity = m_pCharacter->GetLinearVelocity() + vAcceleration * m_pCharacter->GetLastStep();
 	m_pCharacter->SetLinearVelocity(vCurrentVelocity.mX, vCurrentVelocity.mY);
 	m_pCharacter->SetLoc(m_pCharacter->GetLoc() + m_pCharacter->GetLinearVelocity() * m_pCharacter->GetLastStep());
 
-	if (m_fTimePassed < m_fWindupTime)
+	m_fTimePassed += m_pCharacter->GetLastStep();
+
+	if (m_fTimePassed < m_fCooldownTime)
 	{
 		return eRunning;
 	}
@@ -22,20 +22,22 @@ Status BehaviorWindup::update()
 		return eSuccess;
 	}
 }
-void BehaviorWindup::onEnter()
+void BehaviorAttack::onEnter()
 {
 	m_fTimePassed = 0;
-	m_pCharacter->SetImage(2);
+	m_pCharacter->SetImage(3);
+	m_pTarget->TakeDamage(m_fDamage);
 
 }
-void BehaviorWindup::onExit()
+void BehaviorAttack::onExit()
 {
 	m_fTimePassed = 0;
-	m_pCharacter->SetImage(2);
+	m_pCharacter->SetImage(3);
 
 }
-BehaviorWindup::BehaviorWindup(Character* _pCharacter, Character* _pOther) : m_pCharacter(_pCharacter)
+BehaviorAttack::BehaviorAttack(Character* _pCharacter, Character* _pTarget) : m_pCharacter(_pCharacter), m_pTarget(_pTarget)
 {
 	m_pPursueSteering = new PursueSteering(m_pCharacter->GetArrive(), _pCharacter);
-	m_pPursueSteering->SetTarget(_pOther);
+	m_pPursueSteering->SetTarget(_pTarget);
 }
+
