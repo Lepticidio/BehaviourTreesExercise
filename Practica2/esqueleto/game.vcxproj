@@ -131,6 +131,7 @@
     <ClCompile Include="BehaviorIdle.cpp" />
     <ClCompile Include="BehaviorPursue.cpp" />
     <ClCompile Include="character.cpp" />
+    <ClCompile Include="ConditionCanSee.cpp" />
     <ClCompile Include="gameConfig.cpp" />
     <ClCompile Include="Group.cpp" />
     <ClCompile Include="host\FolderWatcher-win.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="BehaviorIdle.h" />
     <ClInclude Include="BehaviorPursue.h" />
     <ClInclude Include="character.h" />
+    <ClInclude Include="ConditionCanSee.h" />
     <ClInclude Include="gameConfig.h" />
     <ClInclude Include="Group.h" />
     <ClInclude Include="host\FolderWatcher-win.h" />
