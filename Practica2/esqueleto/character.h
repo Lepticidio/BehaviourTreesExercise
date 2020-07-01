@@ -64,6 +64,7 @@ public:
 	inline Params GetParams() { return mParams; };
 	float GetLastStep() { return m_fLastStep; }
 	ArriveSteering* GetArrive() { return m_pArrive; }
+	float GetHealth() { return m_fHealth; }
 private:
 	static int _setLinearVel(lua_State* L);
 	static int _setAngularVel(lua_State* L);

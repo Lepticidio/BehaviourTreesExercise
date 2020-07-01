@@ -134,6 +134,7 @@
     <ClCompile Include="BehaviorWindup.cpp" />
     <ClCompile Include="character.cpp" />
     <ClCompile Include="ConditionCanSee.cpp" />
+    <ClCompile Include="ConditionOtherIsAlive.cpp" />
     <ClCompile Include="gameConfig.cpp" />
     <ClCompile Include="Group.cpp" />
     <ClCompile Include="host\FolderWatcher-win.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="BehaviorWindup.h" />
     <ClInclude Include="character.h" />
     <ClInclude Include="ConditionCanSee.h" />
+    <ClInclude Include="ConditionOtherIsAlive.h" />
     <ClInclude Include="gameConfig.h" />
     <ClInclude Include="Group.h" />
     <ClInclude Include="host\FolderWatcher-win.h" />

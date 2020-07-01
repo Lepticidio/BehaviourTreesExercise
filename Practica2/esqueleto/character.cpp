@@ -13,6 +13,9 @@
 #include "Sequence.h"
 #include "Selector.h"
 #include "ConditionCanSee.h"
+#include "BehaviorWindup.h"
+#include "BehaviorAttack.h"
+#include "ConditionOtherIsAlive.h"
 
 USVec2D Character::RotateVector(USVec2D _vInitialVector, float _fAngle)
 {
@@ -92,31 +95,35 @@ void Character::OnUpdate(float step)
 		vAcceleration = USVec2D(0, 0);
 		SetLinearVelocity(0, 0);
 	}
-	//USVec2D vAcceleration = m_pPathSteering->GetSteering();
-	//USVec2D vAcceleration (0,0);
-	USVec2D vCurrentVelocity = GetLinearVelocity() + vAcceleration * step;
-	SetLinearVelocity(vCurrentVelocity.mX, vCurrentVelocity.mY);
-	SetLoc(GetLoc() + GetLinearVelocity() * step);
-
-	//float fAngularAcceleration = m_pAlign->GetSteering(mParams.targetRotation);
-	float fAngularAcceleration = m_pAlignToMovement->GetSteering();
-	//float fAngularAcceleration = 0;
-	float fCurrentAngularVelocity = GetAngularVelocity() + fAngularAcceleration;
-	SetAngularVelocity(fCurrentAngularVelocity);
-	float fAngleToSet = GetRot() + fCurrentAngularVelocity;
-	while (fAngleToSet >= 360 || fAngleToSet < 0)
+	if (m_fHealth > 0)
 	{
-		if (fAngleToSet >= 360)
+		//USVec2D vAcceleration = m_pPathSteering->GetSteering();
+		//USVec2D vAcceleration (0,0);
+		USVec2D vCurrentVelocity = GetLinearVelocity() + vAcceleration * step;
+		SetLinearVelocity(vCurrentVelocity.mX, vCurrentVelocity.mY);
+		SetLoc(GetLoc() + GetLinearVelocity() * step);
+
+		//float fAngularAcceleration = m_pAlign->GetSteering(mParams.targetRotation);
+		float fAngularAcceleration = m_pAlignToMovement->GetSteering();
+		//float fAngularAcceleration = 0;
+		float fCurrentAngularVelocity = GetAngularVelocity() + fAngularAcceleration;
+		SetAngularVelocity(fCurrentAngularVelocity);
+		float fAngleToSet = GetRot() + fCurrentAngularVelocity;
+		while (fAngleToSet >= 360 || fAngleToSet < 0)
 		{
-			fAngleToSet -= 360;
+			if (fAngleToSet >= 360)
+			{
+				fAngleToSet -= 360;
+			}
+			else if (fAngleToSet < 0)
+			{
+				fAngleToSet += 360;
+			}
+
 		}
-		else if (fAngleToSet < 0)
-		{
-			fAngleToSet += 360;
-		}
+		SetRot(fAngleToSet);
 
 	}
-	SetRot(fAngleToSet);
 
 }
 
@@ -185,12 +192,19 @@ int Character::_checkIsEnemy(lua_State* L)
 		Selector* pRoot = new Selector();
 		Sequence* pAlertSequence = new Sequence();
 		ConditionCanSee* pCanSee = new ConditionCanSee(self, pToBePursued);
+		ConditionOtherIsAlive* pOtherIsAlive = new ConditionOtherIsAlive(pToBePursued);
 		BehaviorPursue* pPursue = new BehaviorPursue(self, pToBePursued);
 		BehaviorIdle* pIdle = new BehaviorIdle(self);
+		BehaviorWindup* pWindup = new BehaviorWindup(self, pToBePursued);
+		BehaviorAttack* pAttack = new BehaviorAttack(self, pToBePursued);
+
 		pRoot->AddBehavior(pAlertSequence);
 		pRoot->AddBehavior(pIdle);
+		pAlertSequence->AddBehavior(pOtherIsAlive);
 		pAlertSequence->AddBehavior(pCanSee);
 		pAlertSequence->AddBehavior(pPursue);
+		pAlertSequence->AddBehavior(pWindup);
+		pAlertSequence->AddBehavior(pAttack);
 
 		self->m_pRoot = pRoot;
 	}

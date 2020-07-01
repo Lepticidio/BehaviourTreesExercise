@@ -45,6 +45,7 @@
     <ClCompile Include="ConditionCanSee.cpp" />
     <ClCompile Include="BehaviorWindup.cpp" />
     <ClCompile Include="BehaviorAttack.cpp" />
+    <ClCompile Include="ConditionOtherIsAlive.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character.h" />
@@ -88,6 +89,7 @@
     <ClInclude Include="ConditionCanSee.h" />
     <ClInclude Include="BehaviorWindup.h" />
     <ClInclude Include="BehaviorAttack.h" />
+    <ClInclude Include="ConditionOtherIsAlive.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="host">
