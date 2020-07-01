@@ -10,6 +10,7 @@ class AlignSteering;
 class AlignToMovement;
 class PathFollowingSteering;
 class Path;
+class Selector;
 class Character : public MOAIEntity2D
 {
 public:
@@ -51,6 +52,7 @@ private:
 	AlignToMovement* m_pAlignToMovement;
 	PathFollowingSteering* m_pPathSteering;
 	Path* m_pPath;
+	Selector* m_pRoot;
 	std::string m_sParamsName;
 	bool m_bIsEnemy = false;
 

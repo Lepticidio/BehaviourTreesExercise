@@ -16,5 +16,9 @@ Status BehaviorIdle::update()
 void BehaviorIdle::onEnter()
 {
 	m_pCharacter->SetImage(0);
-
+	m_pCharacter->SetLinearVelocity(0, 0);
+}
+void BehaviorIdle::onExit()
+{
+	m_pCharacter->SetLinearVelocity(0, 0);
 }

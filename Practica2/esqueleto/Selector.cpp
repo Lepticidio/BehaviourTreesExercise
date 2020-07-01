@@ -22,3 +22,7 @@ void Selector::onEnter()
 {
 	m_iCurrentChild = 0;
 }
+void Selector::onExit()
+{
+	m_iCurrentChild = 0;
+}

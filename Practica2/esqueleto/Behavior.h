@@ -10,11 +10,10 @@ enum Status
 class Behavior
 {
 protected:
-	Status update();
-	void onEnter();
-	void onExit();
+	virtual Status update() = 0;
+	virtual void onEnter() = 0;
+	virtual void onExit() = 0;
 public:
-	Behavior();
 	Status tick();
 private:
 	Status m_eStatus;

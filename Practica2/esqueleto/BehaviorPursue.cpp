@@ -17,8 +17,13 @@ void BehaviorPursue::onEnter()
 	m_pCharacter->SetImage(1);
 
 }
+void BehaviorPursue::onExit()
+{
+	m_pCharacter->SetImage(1);
+
+}
 BehaviorPursue::BehaviorPursue(Character* _pCharacter, Character* _pOther) : m_pCharacter(_pCharacter)
 {
-	ArriveSteering* pArrive = new ArriveSteering(m_pCharacter);
-	m_pPursueSteering = new PursueSteering(pArrive, _pOther);
+	m_pPursueSteering = new PursueSteering(m_pCharacter->GetArrive(), _pCharacter);
+	m_pPursueSteering->SetTarget(_pOther);
 }

@@ -6,5 +6,7 @@ class Group : public Behavior
 protected:
 	typedef std::vector<Behavior*> Behaviors;
 	Behaviors m_tChildren;
+public:
+	void AddBehavior(Behavior* _pBehavior);
 };
 

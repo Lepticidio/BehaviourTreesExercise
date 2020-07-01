@@ -7,7 +7,8 @@ class BehaviorIdle : public Behavior
 public:
 	BehaviorIdle();
 	BehaviorIdle(Character* _pCharacter);
-	Status update();
-	void onEnter();
+	Status update() override;
+	void onEnter() override;
+	void onExit() override;
 };
 

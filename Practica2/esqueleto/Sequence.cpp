@@ -21,3 +21,7 @@ void Sequence::onEnter()
 {
 	m_iCurrentChild = 0;
 }
+void Sequence::onExit()
+{
+	m_iCurrentChild = 0;
+}

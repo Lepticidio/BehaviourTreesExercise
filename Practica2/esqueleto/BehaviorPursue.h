@@ -8,7 +8,8 @@ class BehaviorPursue : public Behavior
     PursueSteering* m_pPursueSteering;
 public:
     BehaviorPursue(Character* _pCharacter, Character* _pOther);
-    void onEnter();
-    Status update();
+    void onEnter() override;
+    void onExit() override;
+    Status update() override;
 };
 

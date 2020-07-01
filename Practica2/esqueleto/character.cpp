@@ -8,6 +8,12 @@
 #include "AlignToMovement.h"
 #include "ArriveSteering.h"
 
+#include "BehaviorIdle.h"
+#include "BehaviorPursue.h"
+#include "Sequence.h"
+#include "Selector.h"
+#include "ConditionCanSee.h"
+
 USVec2D Character::RotateVector(USVec2D _vInitialVector, float _fAngle)
 {
 	float fRadians = _fAngle / 57.2958f;
@@ -76,7 +82,7 @@ void Character::OnUpdate(float step)
 	}
 	else
 	{
-		//vAcceleration = m_pPursueSteering->GetSteering();
+		m_pRoot->tick();
 	}
 	//USVec2D vAcceleration = m_pPathSteering->GetSteering();
 	//USVec2D vAcceleration (0,0);
@@ -167,6 +173,18 @@ int Character::_checkIsEnemy(lua_State* L)
 		Character* pToBePursued = state.GetLuaObject<Character>(3, 0.0f);
 		self->SetParamsName("params_enemy.xml");
 		//self->SetPursuedCharacter(pToBePursued);
+
+		Selector* pRoot = new Selector();
+		Sequence* pAlertSequence = new Sequence();
+		ConditionCanSee* pCanSee = new ConditionCanSee(self, pToBePursued);
+		BehaviorPursue* pPursue = new BehaviorPursue(self, pToBePursued);
+		BehaviorIdle* pIdle = new BehaviorIdle(self);
+		pRoot->AddBehavior(pAlertSequence);
+		pRoot->AddBehavior(pIdle);
+		pAlertSequence->AddBehavior(pCanSee);
+		pAlertSequence->AddBehavior(pPursue);
+
+		self->m_pRoot = pRoot;
 	}
 
 	return 0;

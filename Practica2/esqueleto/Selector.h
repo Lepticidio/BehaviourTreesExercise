@@ -3,8 +3,9 @@
 class Selector : public Group
 {
 protected:
-	void onEnter();
-	Status update();
+	void onEnter() override;
+	void onExit() override;
+	Status  update() override;
 	int m_iCurrentChild;
 };
 

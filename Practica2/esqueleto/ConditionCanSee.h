@@ -9,6 +9,8 @@ class ConditionCanSee : public Behavior
     Character* m_pOther;
 public:
     ConditionCanSee(Character* _pCharacter, Character* _pOther);
-    Status update();
+    Status update() override;
+    void onEnter() override;
+    void onExit() override;
 };
 

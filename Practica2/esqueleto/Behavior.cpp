@@ -1,8 +1,5 @@
 #include "stdafx.h"
 #include "Behavior.h"
-Behavior::Behavior()
-{
-}
 
 Status Behavior::tick()
 {
@@ -24,8 +21,4 @@ void Behavior::onEnter()
 void Behavior::onExit()
 {
 
-}
-Status Behavior::update()
-{
-	return eInvalid;
 }

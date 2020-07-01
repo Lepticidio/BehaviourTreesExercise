@@ -18,3 +18,10 @@ Status ConditionCanSee::update()
 		return eFail;
 	}
 }
+void ConditionCanSee::onEnter()
+{
+}
+void ConditionCanSee::onExit()
+{
+
+}
