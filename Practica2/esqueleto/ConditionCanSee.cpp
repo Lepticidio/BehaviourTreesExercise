@@ -9,7 +9,8 @@ Status ConditionCanSee::update()
 {
 	USVec2D vDirEnemy = m_pOther->GetLoc() - m_pCharacter->GetLoc();
 	USVec2D vForward = Character::RotateVector(USVec2D(1, 0), m_pCharacter->GetRot());
-	if (Character::AngleBetweenVectors(vDirEnemy, vForward) < m_fMaxAngle)
+	float fAngle = Character::AngleBetweenVectors(vDirEnemy, vForward);
+	if (fAngle < m_fMaxAngle)
 	{
 		return eSuccess;
 	}

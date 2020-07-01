@@ -21,8 +21,16 @@ Status Selector::update()
 void Selector::onEnter()
 {
 	m_iCurrentChild = 0;
+	for (int i = 0; i < m_tChildren.size(); i++)
+	{
+		m_tChildren[i]->Reset();
+	}
 }
 void Selector::onExit()
 {
 	m_iCurrentChild = 0;
+	for (int i = 0; i < m_tChildren.size(); i++)
+	{
+		m_tChildren[i]->Reset();
+	}
 }

@@ -17,4 +17,6 @@ public:
 	Status tick();
 private:
 	Status m_eStatus;
+public:
+	void Reset();
 };

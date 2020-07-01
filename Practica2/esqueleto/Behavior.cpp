@@ -14,11 +14,7 @@ Status Behavior::tick()
 	}
 	return m_eStatus;
 }
-void Behavior::onEnter()
+void Behavior::Reset()
 {
-
-}
-void Behavior::onExit()
-{
-
+	m_eStatus = eInvalid;
 }

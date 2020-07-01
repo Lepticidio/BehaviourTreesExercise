@@ -20,8 +20,16 @@ Status Sequence::update()
 void Sequence::onEnter()
 {
 	m_iCurrentChild = 0;
+	for (int i = 0; i < m_tChildren.size(); i++)
+	{
+		m_tChildren[i]->Reset();
+	}
 }
 void Sequence::onExit()
 {
 	m_iCurrentChild = 0;
+	for (int i = 0; i < m_tChildren.size(); i++)
+	{
+		m_tChildren[i]->Reset();
+	}
 }
