@@ -12,3 +12,8 @@ Status BehaviorPursue::update()
 	m_pCharacter->SetLoc(m_pCharacter->GetLoc() + m_pCharacter->GetLinearVelocity() * m_pCharacter->GetLastStep());
 	return eInvalid;
 }
+void BehaviorPursue::onEnter()
+{
+	m_pCharacter->SetImage(1);
+
+}

@@ -1,5 +1,9 @@
 #include "stdafx.h"
 #include "Behavior.h"
+Behavior::Behavior()
+{
+}
+
 Status Behavior::tick()
 {
 	if (m_eStatus == eInvalid)
