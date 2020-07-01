@@ -36,5 +36,5 @@ BehaviorPursue::BehaviorPursue(Character* _pCharacter, Character* _pOther) : m_p
 {
 	m_pPursueSteering = new PursueSteering(m_pCharacter->GetArrive(), _pCharacter);
 	m_pPursueSteering->SetTarget(_pOther);
-	m_fMinDistance = 75.f;
+	m_fMinDistance = 32.f;
 }

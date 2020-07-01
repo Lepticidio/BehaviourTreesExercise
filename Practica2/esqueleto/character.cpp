@@ -129,12 +129,6 @@ void Character::OnUpdate(float step)
 
 void Character::DrawDebug()
 {
-	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get();
-	//m_pSeek->DrawDebug();
-	m_pArrive->DrawDebug();
-	//m_pPath->DrawDebug();
-	gfxDevice.SetPenColor(1.0f, 1.0f, 0.0f, 0.5f);
-	MOAIDraw::DrawLine(GetLoc(), GetLoc() + GetLinearVelocity());
 }
 
 
@@ -195,7 +189,7 @@ int Character::_checkIsEnemy(lua_State* L)
 		ConditionOtherIsAlive* pOtherIsAlive = new ConditionOtherIsAlive(pToBePursued);
 		BehaviorPursue* pPursue = new BehaviorPursue(self, pToBePursued);
 		BehaviorIdle* pIdle = new BehaviorIdle(self);
-		BehaviorWindup* pWindup = new BehaviorWindup(self, pToBePursued);
+		BehaviorWindup* pWindup = new BehaviorWindup(self);
 		BehaviorAttack* pAttack = new BehaviorAttack(self, pToBePursued);
 
 		pRoot->AddBehavior(pAlertSequence);

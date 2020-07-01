@@ -1,7 +1,6 @@
 #pragma once
 #include "Behavior.h"
 class Character;
-class PursueSteering;
 class BehaviorAttack : public Behavior
 {
 	float m_fTimePassed = 0.0f;
@@ -9,7 +8,6 @@ class BehaviorAttack : public Behavior
 	float m_fDamage = 40;
 	Character* m_pCharacter;
 	Character* m_pTarget;
-	PursueSteering* m_pPursueSteering;
 public:
 	BehaviorAttack(Character* _pOwner, Character* _pTarget);
 	void onEnter() override;
